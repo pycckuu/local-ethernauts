@@ -21,13 +21,13 @@ describe("Attacking King", function () {
   });
 
   // Get this to pass!
-  it("Succesfully become and remain the king forever", async () => {
-    await attacker.hackContract({ gasLimit: 30000000 });
+  it("Successfully become and remain the king forever", async () => {
+    await attacker.hackContract({ gasLimit: 30_000_000 });
     try {
       await kingPlayer.sendTransaction({
         value: ethers.utils.parseEther("100"),
         to: victim.address,
-        gasLimit: 30000000,
+        gasLimit: 30_000_000,
       });
     } catch (error) {
       console.log("error: ", error);
